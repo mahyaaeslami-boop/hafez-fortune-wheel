@@ -1,0 +1,310 @@
+/* Yalda Night Theme Colors */
+:root {
+    --primary-dark: #0a0e1f;
+    --primary-purple: #5d3a84;
+    --accent-gold: #d4af37;
+    --accent-red: #c41e3a;
+    --text-light: #f0f0f0;
+    --text-muted: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+/* Background Animation */
+.yalda-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0e1f 0%, #1a0033 50%, #0a0e1f 100%);
+    z-index: -1;
+}
+
+.yalda-background::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(93, 58, 132, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(196, 30, 58, 0.08) 0%, transparent 50%);
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(50px, 50px);
+    }
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: rgba(93, 58, 132, 0.2);
+    border-bottom: 2px solid var(--accent-gold);
+    backdrop-filter: blur(10px);
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    color: var(--accent-gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--accent-red);
+    font-style: italic;
+}
+
+/* Main Container */
+.container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Wheel Section */
+.wheel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.wheel-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background: rgba(93, 58, 132, 0.15);
+    border-radius: 50%;
+    border: 3px solid var(--accent-gold);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.3), inset 0 0 40px rgba(93, 58, 132, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wheelCanvas {
+    cursor: grab;
+}
+
+#wheelCanvas:active {
+    cursor: grabbing;
+}
+
+/* Wheel Pointer */
+.wheel-pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid var(--accent-gold);
+    z-index: 10;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+}
+
+/* Spin Button */
+.spin-button {
+    padding: 18px 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+    background: linear-gradient(135deg, var(--accent-gold), #f0d96a);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.spin-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #f0d96a, var(--accent-gold));
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+}
+
+.spin-button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.spin-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Fortune Section */
+.fortune-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.fortune-card {
+    background: rgba(93, 58, 132, 0.25);
+    border: 2px solid var(--accent-gold);
+    border-radius: 15px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.fortune-header {
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.fortune-number {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.fortune-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.fortune-translation {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+}
+
+/* Info Section */
+.info-section {
+    background: rgba(196, 30, 58, 0.15);
+    border: 2px solid var(--accent-red);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.info-section h3 {
+    color: var(--accent-gold);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-section p {
+    line-height: 1.8;
+    color: var(--text-light);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 2px solid var(--accent-gold);
+    color: var(--text-muted);
+    margin-top: 60px;
+    background: rgba(93, 58, 132, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .wheel-container {
+        width: 400px;
+        height: 400px;
+    }
+
+    #wheelCanvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .wheel-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .fortune-card {
+        padding: 25px;
+    }
+
+    .fortune-text {
+        font-size: 1rem;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+}
+
+/* Loading Animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+}

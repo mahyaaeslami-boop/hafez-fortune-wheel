@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafez Fortune Wheel - Yalda Night</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="yalda-background"></div>
+    
+    <header class="header">
+        <h1>Hafez Fortune Wheel</h1>
+        <p class="subtitle">Yalda Night - The Night of Destiny</p>
+    </header>
+
+    <div class="container">
+        <div class="wheel-section">
+            <div class="wheel-container">
+                <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                <div class="wheel-pointer"></div>
+            </div>
+            <button class="spin-button" id="spinButton">Spin the Wheel</button>
+        </div>
+
+        <div class="fortune-section">
+            <div class="fortune-card" id="fortuneCard">
+                <div class="fortune-header">Your Fortune</div>
+                <div class="fortune-number" id="fortuneNumber">-</div>
+                <div class="fortune-text" id="fortuneText">
+                    Click the button to spin the wheel and receive your fortune from Hafez
+                </div>
+                <div class="fortune-translation" id="fortuneTranslation"></div>
+            </div>
+
+            <div class="info-section">
+                <h3>About Yalda Night</h3>
+                <p>Yalda Night is an ancient Persian celebration marking the Winter Solstice. On this longest night of the year, people gather to read poems, share fruits and nuts, and seek guidance through the wisdom of Hafez.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Hafez Fortune Wheel | Celebrating Yalda Night</p>
+    </footer>
+
+    <script src="poems.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
