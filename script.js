@@ -73,16 +73,16 @@ class FortuneWheel {
 
     generateColors() {
         return [
-            '#8b3f7a',
-            '#6b4c8a',
-            '#c41e3a',
-            '#a85e5e',
-            '#7d4e6f',
-            '#5d3a84',
-            '#9e4562',
-            '#6d5a7a',
-            '#9d3e52',
-            '#7a4a72',
+            '#ff6b9d',
+            '#c77dff',
+            '#5ee7df',
+            '#ffd60a',
+            '#ff9f1c',
+            '#ff6b6b',
+            '#a29bfe',
+            '#74b9ff',
+            '#81ecec',
+            '#fab1a0',
         ];
     }
 
@@ -141,6 +141,7 @@ class FortuneWheel {
                 this.spinButton.disabled = false;
                 this.displayFortune(selectedSegment);
                 this.playSound();
+                this.createConfetti();
             }
         };
 
@@ -172,35 +173,78 @@ class FortuneWheel {
         try {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             
-            // First note
+            // First note - higher pitch
             const osc1 = audioContext.createOscillator();
             const gain1 = audioContext.createGain();
             osc1.connect(gain1);
             gain1.connect(audioContext.destination);
             
-            osc1.frequency.value = 800;
+            osc1.frequency.value = 880;
             osc1.type = 'sine';
             gain1.gain.setValueAtTime(0.2, audioContext.currentTime);
-            gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
             
             osc1.start(audioContext.currentTime);
-            osc1.stop(audioContext.currentTime + 0.3);
+            osc1.stop(audioContext.currentTime + 0.4);
             
-            // Second note
+            // Second note - even higher
             const osc2 = audioContext.createOscillator();
             const gain2 = audioContext.createGain();
             osc2.connect(gain2);
             gain2.connect(audioContext.destination);
             
-            osc2.frequency.value = 1000;
+            osc2.frequency.value = 1200;
             osc2.type = 'sine';
-            gain2.gain.setValueAtTime(0.15, audioContext.currentTime + 0.15);
-            gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.45);
+            gain2.gain.setValueAtTime(0.15, audioContext.currentTime + 0.2);
+            gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
             
-            osc2.start(audioContext.currentTime + 0.15);
-            osc2.stop(audioContext.currentTime + 0.45);
+            osc2.start(audioContext.currentTime + 0.2);
+            osc2.stop(audioContext.currentTime + 0.6);
         } catch (e) {
             // Sound not supported, silently fail
+        }
+    }
+
+    createConfetti() {
+        const confettiPieces = 30;
+        for (let i = 0; i < confettiPieces; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '1000';
+                
+                const colors = ['#ff6b9d', '#c77dff', '#5ee7df', '#ffd60a', '#ff9f1c'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.boxShadow = `0 0 10px ${confetti.style.background}`;
+                
+                document.body.appendChild(confetti);
+                
+                let top = -10;
+                let left = parseFloat(confetti.style.left);
+                const speed = Math.random() * 3 + 2;
+                const sway = Math.random() * 2 - 1;
+                
+                const animate = () => {
+                    top += speed;
+                    left += sway;
+                    confetti.style.top = top + 'px';
+                    confetti.style.left = left + '%';
+                    
+                    if (top < window.innerHeight) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        confetti.remove();
+                    }
+                };
+                
+                animate();
+            }, i * 30);
         }
     }
 
@@ -221,12 +265,22 @@ style.textContent = `
     @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: scale(0.95) rotateY(20deg);
+            transform: scale(0.9) rotateY(20deg);
         }
         to {
             opacity: 1;
             transform: scale(1) rotateY(0deg);
         }
+    }
+
+    @keyframes wobble {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(2deg); }
+        75% { transform: rotate(-2deg); }
+    }
+
+    .wobble {
+        animation: wobble 0.3s ease-in-out;
     }
 `;
 document.head.appendChild(style);
@@ -243,6 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        });
+    });
+
+    // Add fun wobble effect on hover for feature cards
+    document.querySelectorAll('.feature').forEach(feature => {
+        feature.addEventListener('mouseenter', function() {
+            this.classList.add('wobble');
+        });
+        feature.addEventListener('mouseleave', function() {
+            this.classList.remove('wobble');
         });
     });
 });
