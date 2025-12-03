@@ -59,12 +59,12 @@ class FortuneWheel {
         this.ctx.arc(this.centerX, this.centerY, 35, 0, Math.PI * 2);
         this.ctx.fillStyle = '#d4af37';
         this.ctx.fill();
-        this.ctx.strokeStyle = '#5d3a84';
+        this.ctx.strokeStyle = '#8b0000';
         this.ctx.lineWidth = 4;
         this.ctx.stroke();
 
         // Draw center decoration
-        this.ctx.fillStyle = '#5d3a84';
+        this.ctx.fillStyle = '#8b0000';
         this.ctx.font = 'bold 14px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
@@ -73,37 +73,21 @@ class FortuneWheel {
 
     generateColors() {
         return [
-            '#8b3f7a',
-            '#6b4c8a',
             '#c41e3a',
-            '#a85e5e',
-            '#7d4e6f',
-            '#5d3a84',
-            '#9e4562',
-            '#6d5a7a',
-            '#9d3e52',
-            '#7a4a72',
+            '#8b0000',
+            '#dc143c',
+            '#8b1a1a',
+            '#b22222',
+            '#900000',
+            '#d41159',
+            '#a01535',
+            '#c41e3a',
+            '#7a0a0a',
         ];
     }
 
     drawSegmentText(segmentIndex, startAngle, endAngle, segmentAngle) {
-        const textAngle = startAngle + segmentAngle / 2;
-        const textRadius = this.radius * 0.65;
-
-        this.ctx.save();
-        this.ctx.translate(this.centerX, this.centerY);
-        this.ctx.rotate(textAngle);
-        this.ctx.translate(textRadius, 0);
-
-        this.ctx.fillStyle = '#d4af37';
-        this.ctx.font = 'bold 14px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
-        
-        const text = `${segmentIndex + 1}`;
-        this.ctx.fillText(text, 0, 0);
-
-        this.ctx.restore();
+        // Numbers removed - wheel segments now display no text
     }
 
     spin() {
