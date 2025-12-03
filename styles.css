@@ -705,6 +705,33 @@ section h2 {
     margin: 10px 0;
 }
 
+.copyright-notice {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.copyright-notice p {
+    margin: 8px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.copyright-notice p:first-child {
+    color: var(--accent-gold);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.copyright-notice p:last-child {
+    color: rgba(160, 160, 160, 0.8);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
